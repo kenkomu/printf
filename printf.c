@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
 			case '%':
 				i++;
 				_putchar('%');
-				braek;
+				break;
 			}
 		}
 		else

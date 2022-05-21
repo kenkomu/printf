@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../main.h"
 #include <stdio.h>
 /**
  * main - Entry point
@@ -19,8 +19,8 @@ int main(void)
 	_printf("_printf specifier (s): %s\n", "string");
 	printf("printf specifier (s): %s\n", "string");
 	
-	_print("_print specifier %%\n");
-	print("printf specifier %%\n");
+	_printf("_print specifier %%\n");
+	printf("printf specifier %%\n");
 
 	return (0);
 }
