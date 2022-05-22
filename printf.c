@@ -1,38 +1,83 @@
 #include "main.h"
-/*
- * *_printf - function that produces output according to a format
- * *@format: character string
- * *return: number of chacaracters printed
- * */
+/**
+ * get_op - select function for conversion char
+ * @c: char to check
+ * Return: pointer to function
+ */
+
+int (*get_op(const char c))(va_list)
+{
+	int i = 0;
+
+	flags_p fp[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"i", print_nbr},
+		{"d", print_nbr},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_hexa_lower},
+		{"X", print_hexa_upper},
+		{"u", print_unsigned},
+		{"S", print_str_unprintable},
+		{"r", print_str_reverse},
+		{"p", print_ptr},
+		{"R", print_rot13},
+		{"%", print_percent}
+	};
+	while (i < 14)
+	{
+		if (c == fp[i].c[0])
+		{
+			return (fp[i].f);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * _printf - Reproduce behavior of printf function
+ * @format: format string
+ * Return: value of printed chars
+ */
+
 int _printf(const char *format, ...)
 {
-	va_list l_strings;
-	int char_count = 0;
-	int i, n;
-	char* ptr;
-	int (*func_sel)(va_list);
+	va_list ap;
+	int sum = 0, i = 0;
+	int (*func)();
 
-	va_start(l_strings, format);
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	va_start(ap, format);
 
-	for (i = 0; format[i] != '\0'; i++)
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			func_sel = selected(format[i + 1]);
-			if (!func_sel)
+			if (format[i + 1] != '\0')
+				func = get_op(format[i + 1]);
+			if (func == NULL)
 			{
-				func_sel(l_strings);
+				_putchar(format[i]);
+				sum++;
 				i++;
-				char_count++;
+			}
+			else
+			{
+				sum += func(ap);
+				i += 2;
+				continue;
 			}
 		}
 		else
 		{
 			_putchar(format[i]);
-			char_count += 1;
+			sum++;
+			i++;
 		}
 	}
-
-	va_end(l_strings);
-	return (char_count);
+	va_end(ap);
+	return (sum);
 }
