@@ -14,7 +14,7 @@ int (*selected(char al))(va_list)
 	if (al == '%')
 		return (print_per);
 
-	if (all == 'i')
+	if (al == 'i')
 		return (print_int);
 
 	return (NULL);
