@@ -7,5 +7,5 @@ int print_int(va_list l_strings)
 		n -= 10 * a;
 		print_int(a);
 	}
-	return (putchar('0'+n));
+	return (_putchar('0'+n));
 }
