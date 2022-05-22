@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 			func_sel = selected(format[i + 1]);
 			if (!func_sel)
 			{
-				func_sel(l_strings)
+				func_sel(l_strings);
 				i++;
 				char_count++;
 			}
