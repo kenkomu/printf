@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 	int char_count = 0;
 	int i, n;
 	char* ptr;
+	int (*func_sel)(l_strings);
 
 	va_start(l_strings, format);
 
@@ -17,24 +18,12 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			func_sel = selected(format[i + 1]);
+			if (!func_sel)
 			{
-			case 'c':
-				_putchar(va_arg(l_strings, int));
+				func_sel(l_strings)
 				i++;
-				break;
-
-			case 's':
-				ptr = va_arg(l_strings, char *);
-				for (n = 0; ptr[n] != '\0'; n++)
-					_putchar(ptr[n]);
-				i++;
-				break;
-
-			case '%':
-				i++;
-				_putchar('%');
-				break;
+				char_count++;
 			}
 		}
 		else
