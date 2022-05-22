@@ -10,7 +10,7 @@ int main(void)
 	int a = _printf("this is us\n");
 	int b = printf("this is us\n");
 
-	printf("_printf: %d\n", a);
+	_printf("_printf: %d\n", a);
 	printf("printf: %d\n", b);
 
 	_printf("_printf specifier (c): %c\n", 'k');
