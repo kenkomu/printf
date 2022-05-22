@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 	int char_count = 0;
 	int i, n;
 	char* ptr;
-	int (*func_sel)(l_strings);
+	int (*func_sel)(va_list);
 
 	va_start(l_strings, format);
 

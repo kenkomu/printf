@@ -1,11 +1,17 @@
 #include "main.h"
 int print_int(va_list l_strings)
 {
-	if( n > 9 )
+	int n;
+
+	n = va_arg(l_strings, int);
+	int printfs(int i)
 	{
-		int a = n / 10;
-		n -= 10 * a;
-		print_int(a);
+		if(n > 9)
+		{
+			int a = n / 10;
+			n -= 10 * a;
+			printfs(a);
+		}
 	}
 	return (_putchar('0'+n));
 }
